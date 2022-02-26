@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bank.activePayment.service.ActivePaymentService;
 import com.bank.activePayment.model.Credit;
+import com.bank.activePayment.model.History;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
@@ -20,10 +21,10 @@ public class ActivePaymentController {
 	private final ActivePaymentService activePaymentService;
 
 	@PostMapping("/pay/{id}")
-	public Mono<Credit> pay(@PathVariable("id") String idProduct,
+	public Mono<History> pay(@PathVariable("id") String idProduct,
 								@RequestParam Double amount) {
 		
-		return activePaymentService.PayCredit(idProduct, amount).switchIfEmpty(Mono.just(new Credit()));
+		return activePaymentService.payCredit(idProduct, amount);
 		
 	}
 	

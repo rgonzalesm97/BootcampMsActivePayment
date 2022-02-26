@@ -21,24 +21,23 @@ public class ActivePaymentProxy {
 								.bodyToMono(Credit.class);
 	}
 	
-	public Mono<Credit> updateAccount(Credit credit){
+	public Mono<Credit> updateCredit(Credit credit){
 		return webClientBuilder.build()
-				.put()
-				.uri("http://localhost:8090/credit")
-				.contentType(MediaType.APPLICATION_JSON)
-				.body(BodyInserters.fromValue(credit))
-				.retrieve()
-				.bodyToMono(Credit.class);
+								.put()
+								.uri("http://localhost:8090/credit")
+								.contentType(MediaType.APPLICATION_JSON)
+								.body(BodyInserters.fromValue(credit))
+								.retrieve()
+								.bodyToMono(Credit.class);
 	}
 	
-	public void saveHistory(History history) {
-		webClientBuilder.build()
+	public Mono<History> saveHistory(History history) {
+		return webClientBuilder.build()
 						.post()
 						.uri("http://localhost:8090/history")
 						.contentType(MediaType.APPLICATION_JSON)
 						.body(BodyInserters.fromValue(history))
 						.retrieve()
-						.bodyToMono(History.class)
-						.subscribe();
+						.bodyToMono(History.class);
 	}
 }
