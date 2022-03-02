@@ -5,6 +5,9 @@ import java.util.Date;
 import org.springframework.stereotype.Service;
 
 import com.bank.activePayment.service.ActivePaymentService;
+
+import lombok.RequiredArgsConstructor;
+
 import com.bank.activePayment.model.Credit;
 import com.bank.activePayment.model.History;
 import com.bank.activePayment.proxy.ActivePaymentProxy;
@@ -12,9 +15,10 @@ import com.bank.activePayment.proxy.ActivePaymentProxy;
 import reactor.core.publisher.Mono;
 
 @Service
+@RequiredArgsConstructor
 public class ActivePaymentServiceImpl implements ActivePaymentService{
 	
-	private ActivePaymentProxy activePaymentProxy = new ActivePaymentProxy();
+	private final ActivePaymentProxy activePaymentProxy = new ActivePaymentProxy();
 	
 	@Override
 	public Mono<History> payCredit(String idCredit, Double amount) {
